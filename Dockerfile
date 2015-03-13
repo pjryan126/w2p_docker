@@ -59,9 +59,7 @@ RUN sudo -u www-data python -c "from gluon.main import save_password; save_passw
 
 ## Expose ports
 EXPOSE 80
-EXPOSE 443
 
 ## Set the default command to execute when creating a new container
 CMD . /usr/share/env/bin/activate
 CMD python anyserver.py -s gunicorn -i 0.0.0.0 -p 80
-CMD python anyserver.py -s gunicorn -i 0.0.0.0 -p 8443
