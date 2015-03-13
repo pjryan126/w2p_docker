@@ -54,12 +54,15 @@ RUN chown -R www-data /usr/share/web2py
 ## Set default working directory where CMD will execute
 WORKDIR /usr/share/web2py
 
-## Set web2py administrative password
-RUN sudo -u www-data python -c "from gluon.main import save_password; save_password('<YOUR PWD>', 8443)"
+## To create ssl self-signed certificates for admin access, uncomment the following lines:
+apt-get install openssl
+openssl genrsa -out server.key 2048
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 ## Expose ports
 EXPOSE 80
 
 ## Set the default command to execute when creating a new container
 CMD . /usr/share/env/bin/activate
-CMD python anyserver.py -s gunicorn -i 0.0.0.0 -p 80
+CMD python anyserver.py -s gunicorn -a '<YOUR PWD>' -c server.crt -k server.key -i 0.0.0.0 -p 80
