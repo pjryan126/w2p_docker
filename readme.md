@@ -9,7 +9,7 @@ This is a Dockerfile that builds an image based on ubuntu for running web2py wit
 1. [Install](https://docs.docker.com/installation) and run Docker.
 
 2. Once you are up and running with Docker, copy the Dockerfile to the root directory of your project and run Docker build:
-> ```sudo docker build -t [image name]```
+> ```sudo docker build -t [image name] .```
 
 3. Run a container based on your newly created image
 > ```sudo docker run --name [container name] -p [host port]:[docker port] -i -t [image name]```
