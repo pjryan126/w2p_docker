@@ -64,3 +64,4 @@ EXPOSE 443
 ## Set the default command to execute when creating a new container
 CMD . /usr/share/env/bin/activate
 CMD python anyserver.py -s gunicorn -i 0.0.0.0 -p 80
+CMD python anyserver.py -s gunicorn -i 0.0.0.0 -p 8443

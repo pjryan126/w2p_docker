@@ -12,5 +12,5 @@ This is a Dockerfile that builds an image based on ubuntu for running web2py wit
 > ```sudo docker build -t [image name]```
 
 3. Run a container based on your newly created image
-> ```sudo docker run --name [image name] -p [host port]:[docker port] -i -t [container name]```
+> ```sudo docker run --name [container name] -p [host port]:[docker port] -i -t [image name]```
 
