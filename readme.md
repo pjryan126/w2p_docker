@@ -1,8 +1,8 @@
 # Web2py Dockerfile
-###### Run [web2py](www.web2py.com) with gunicorn as a [Docker](www.docker.com) container.
+###### Run [web2py](www.web2py.com) as a [Docker](www.docker.com) container.
 
 ### Summary
-This is a Dockerfile that builds an image based on ubuntu for running web2py with gunicorn as a Docker container. The file is inspired by O.S. Tezer's [tutorial](https://www.digitalocean.com/community/tutorials/docker-explained-how-to-containerize-python-web-applications) on containerizing Python web apps on the [DigitalOcean](www.digitalocean.com) community site.
+This is a Dockerfile that builds an image based on ubuntu for running web2py  as a Docker container. The file is inspired by O.S. Tezer's [tutorial](https://www.digitalocean.com/community/tutorials/docker-explained-how-to-containerize-python-web-applications) on containerizing Python web apps on the [DigitalOcean](www.digitalocean.com) community site.
 
 ### How it works
 

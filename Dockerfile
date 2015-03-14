@@ -54,12 +54,6 @@ RUN chown -R www-data /usr/share/web2py
 ## Set default working directory where CMD will execute
 WORKDIR /usr/share/web2py
 
-## To create ssl self-signed certificates for admin access, uncomment the following lines:
-apt-get install openssl
-openssl genrsa -out server.key 2048
-openssl req -new -key server.key -out server.csr
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-
 ## Expose ports
 EXPOSE 80
 
@@ -67,13 +61,13 @@ EXPOSE 80
 CMD . /usr/share/env/bin/activate
 
 ## To create ssl self-signed certificates for admin access, uncomment the following lines:
-#RUN apt-get install openssl
-#RUN openssl genrsa -out server.key 2048
-#RUN openssl req -new -key server.key -out server.csr \
-#-subj "/C=US/ST=New York/L=New York/O=Data Analytics/OU=Internal Audit/CN=IADA Development"
-#openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+RUN apt-get install openssl
+RUN openssl genrsa -out server.key 2048
+RUN openssl req -new -key server.key -out server.csr \
+-subj "/C=US/ST=New York/L=New York/O=Data Analytics/OU=Internal Audit/CN=IADA Development"
+RUN openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 ## Uncomment the first line below and comment out the second line
 ## if you are using a self-signed certificate for admin access.
-#CMD python anyserver.py -s gunicorn -a '<YOUR PWD>' -c server.crt -k server.key -i 0.0.0.0 -p 80
-CMD python anyserver.py -s gunicorn -i 0.0.0.0 -p 80
+CMD python web2py.py -a "<MyPassword>" -c server.crt -k server.key -i 0.0.0.0 -p 80
+#CMD python web2py.py -i 0.0.0.0 -p 80
