@@ -49,6 +49,8 @@ RUN chown -R www-data /usr/share/web2py
 
 ## Set default working directory where CMD will execute
 WORKDIR /usr/share/web2py
+
+## Add NEWINSTALL file to allow web2py to create welcome.w2p file
 RUN touch 'NEWINSTALL'
 
 ## Expose ports
