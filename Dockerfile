@@ -2,8 +2,7 @@
 ##################################################
 ## Dockerfile to build Python WSGI application 
 ## containers in Ubuntu using the latest verion 
-## of the web2py framework and gunicorn as 
-## an application server.
+## of the web2py framework.
 ##################################################
 
 ## Set base image to Ubuntu 14.04.2
@@ -25,9 +24,6 @@ RUN apt-get install -y python python-dev python-setuptools python-pip
 
 ## Install git
 RUN apt-get install -y git
-
-## Install gunicorn
-RUN apt-get install -y gunicorn
 
 ## Install virtualenv
 RUN pip install virtualenv
@@ -53,6 +49,7 @@ RUN chown -R www-data /usr/share/web2py
 
 ## Set default working directory where CMD will execute
 WORKDIR /usr/share/web2py
+RUN touch 'NEWINSTALL'
 
 ## Expose ports
 EXPOSE 80
@@ -69,5 +66,5 @@ RUN openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.c
 
 ## Uncomment the first line below and comment out the second line
 ## if you are using a self-signed certificate for admin access.
-CMD python web2py.py -a "<MyPassword>" -c server.crt -k server.key -i 0.0.0.0 -p 80
-#CMD python web2py.py -i 0.0.0.0 -p 80
+#CMD python web2py.py -c server.crt -k server.key -i 0.0.0.0 -p 80
+CMD sudo python web2py.py -i 0.0.0.0 -p 80
