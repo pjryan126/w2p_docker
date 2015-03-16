@@ -21,6 +21,8 @@ RUN apt-get update
 ## Install basic Python tools
 RUN apt-get install -y python python-dev python-setuptools python-pip
 
+## To install python headers for ldap, uncomment the following line
+#RUN apt-get install -y libldap2-dev libsasl2-dev
 
 ## Install git
 RUN apt-get install -y git
@@ -51,13 +53,12 @@ RUN chown -R www-data /usr/share/web2py
 WORKDIR /usr/share/web2py
 
 ## Add NEWINSTALL file to allow web2py to create welcome.w2p file
-RUN touch 'NEWINSTALL'
 
 ## Expose ports
 EXPOSE 80
 
 ## Activate virtualenv when creating new container.
-CMD . /usr/share/env/bin/activate
+RUN . /usr/share/env/bin/activate
 
 ## To create ssl self-signed certificates for admin access, uncomment the following lines:
 RUN apt-get install openssl
@@ -68,5 +69,5 @@ RUN openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.c
 
 ## Uncomment the first line below and comment out the second line
 ## if you are using a self-signed certificate for admin access.
-#CMD python web2py.py -c server.crt -k server.key -i 0.0.0.0 -p 80
-CMD sudo python web2py.py -i 0.0.0.0 -p 80
+CMD python web2py.py -c server.crt -k server.key -i 0.0.0.0 -p 80
+#CMD sudo python web2py.py -i 0.0.0.0 -p 80
